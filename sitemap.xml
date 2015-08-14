@@ -2,17 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/08/12/Backbone-%D0%A7%D0%B0%D1%81%D1%82%D1%8C-1-%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8-%D0%BA%D0%BE%D0%BB%D0%BB%D0%B5%D0%BA%D1%86%D0%B8%D0%B8-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F/</loc>
-    <lastmod>2015-08-14T06:26:21.000Z</lastmod>
+    <loc>http://blog.rukomoynikov.ru/2015/08/12/backbone-intro-part1/</loc>
+    <lastmod>2015-08-14T08:59:39.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/07/20/Fundamental-Node-js-design-patterns/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/</loc>
+    <lastmod>2015-08-14T08:59:34.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/07/17/Please-booking-ticket/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/06/12/free-template-joremipsum/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/06/08/joinme-theme/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
@@ -27,12 +32,12 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/07/16/Template-Perth/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/06/12/free-template-joremipsum/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/07/17/Please-booking-ticket/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/07/16/Template-Perth/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
@@ -42,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/06/08/joinme-theme/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/07/20/Fundamental-Node-js-design-patterns/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   

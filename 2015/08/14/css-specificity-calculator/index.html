@@ -5,13 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Максим Рукомойников">
-    <title>Максим Рукомойников - man Maksim Rukomoynikov</title>
+    <title>Максим Рукомойников - Мой селектор сильнее чем твой</title>
     <meta name="author" content="Maksim Rukomoynikov">
     <meta name="description" content="Максим Рукомойников">
-    <link rel="icon" href="../assets/images/null">
+    <link rel="icon" href="../../../../assets/images/null">
     
     <!--STYLES-->
-    <link rel="stylesheet" href="../assets/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="../../../../assets/css/style.min.css" type="text/css">
     <!--STYLES END-->
     
 </head>
@@ -24,7 +24,7 @@
         <a class="header-title-link" href="http://blog.rukomoynikov.ru">Максим Рукомойников</a>
     </h1>
     
-        <a class="header-picture-link" href="../#about">
+        <a class="header-picture-link" href="../../../../#about">
             <img class="header-picture" src="http://www.gravatar.com/avatar/7ca3e45c033bc24eb1806d5401356049?s=90"/>
         </a>
     
@@ -32,7 +32,7 @@
             <nav id="sidebar">
     
         <div class="sidebar-profile">
-            <a href="../about">
+            <a href="../../../../about">
                 
                     <img class="sidebar-profile-picture" src="http://www.gravatar.com/avatar/7ca3e45c033bc24eb1806d5401356049?s=90"/>
                 
@@ -150,27 +150,67 @@
     
         <div class="post-header main-content-wrap">
     
-        <h1 class="post-title" itemprop="headline">man Maksim Rukomoynikov</h1>
+        <h1 class="post-title" itemprop="headline">Мой селектор сильнее чем твой</h1>
     
     <div class="post-meta">
-    <time  itemprop="datePublished" content="Mon Jun 08 2015 18:59:35 GMT+0400">
-        Jun 08, 2015
+    <time  itemprop="datePublished" content="Fri Aug 14 2015 10:44:20 GMT+0400">
+        Aug 14, 2015
     </time>
     
 </div>
 </div>
     
     <div class="post-content markdown main-content-wrap" itemprop="articleBody">
-        <p>Привет.</p>
-<p>Как уже понятно (все заголовки сайта трубят об этом) - меня зовут Максим Рукомойников. Мне 30, я FullStack developer. Большую часть жизни, прораотал менеджером интернет-проектов, они (проекты) были большие и маленькие. Кроме того, я был руководителем web-отдела в МФЮА и участником команды по созданию лаборатории стартапов (мудрёно, конечно, но хотели сделать Хогвартс и заработать денег).</p>
-<p>Моё <a href="http://hh.ru/resume/6dfea1fcff010e26c40039ed1f486433737564" target="_blank" rel="external">формальное резюме</a>.</p>
-<p>Итак, как вы уже говорил большую часть времени, я работал менеджером. Но по многим причинам, главная - необходимость что-то делать своими руками, решил сменить проффессию. Мне всегда было интересно </p>
+        <p>Скорее для себя, на память. О том как посчитать специфику CSS-селекторов. Все знают, что правила в CSS применяются не по порядку их написания (за одним исключением описанным ниже), а по специфике селектора. Пример: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div a &#123;&#10;&#9;color : red;&#10;&#125;&#10;&#10;a &#123;&#10;&#9;color : blue;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>Как вы думаете какого цвета будут ссылки на странице? Верно - красного, потому что селектор “div a” специфичнее (подробнее) чем просто “a”. Ещё примеры селекторов:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.menu &#62; a &#62; span#first&#10;&#10;// &#1086;&#1085; &#1078;&#1077;&#10;&#10;#first</span><br></pre></td></tr></table></figure>
+<p>Посмотрите как браузер разбирает селекторы и применяет их к элементам, пример для div.menu &gt; a &gt; span#first:</p>
+<ul>
+<li>Найти все элементы с id - #first (вы помните что id, должен быть уникальным на странице, да?).</li>
+<li>Выбрать элементы которые являются span</li>
+<li>Отделить только те элементы которые являются прямыми потомками тега a</li>
+<li>В этой подвыборке найти все элементы которые являются потомками элементов с классом menu</li>
+<li>Отфильтровать подвыборку, чтобы все элементы с классом menu являлись div’ами.</li>
+<li>Применить оформление к тем самым первым элементам, с id - #first.</li>
+</ul>
+<p>Самое главное - то что браузер читаает ваши селекторы справо налево. Другими словами “#menu span” будет иметь всего два шага:</p>
+<ul>
+<li>Найти все элементы span на странице</li>
+<li>Из них сделать подвыборку тех кто является потомком элементов с id - #menu</li>
+<li>Применить офорление</li>
+</ul>
+<p>Что вобщем занмиает меньше времени, именно такой парадигмы придерживается БЭМ. </p>
+<h2 id="Как_посчитать_специфику_селектора">Как посчитать специфику селектора</h2><p>Оказалось всё просто, каждый параметр в селекторе обладает определённой силой, которая заранее известна, сложив все составляющие в сумме можно получить общую силу селектора.</p>
+<ul>
+<li>Элементы и пседоэлементы (‘a, div , body, :before, :after’) составляют 1 очко.</li>
+<li>Классы и селекторы по аттрибутам (‘.element, [type=”text”]) получают 10 очков.</li>
+<li>ID (‘#header) идут за 100 очков.</li>
+<li>Инлайн-стили считаются за 1000 очков.</li>
+<li>Самый мощный параметр - ‘!important’ его значение равно NaN (Not a number)</li>
+</ul>
+<p>Соответственно “div a” - даст 2 очка, а “#div a” - 101 очко. Соответственно второй селектор важнее чем первый и именно его параметры будут применены к элементам a.</p>
+<p>В начале я упомянул о том что иногда селекторы работют именно в порядке обьявления, это случается тогда когда они равны. Пример я показал на <a href="http://codepen.io/anon/pen/KpYBxa" target="_blank" rel="external">codepen</a>.</p>
+<p>Несколько полезных ресурсов по теме:</p>
+<ul>
+<li><a href="http://cssstats.com" target="_blank" rel="external">http://cssstats.com</a> - анализ CSS файла и статистика.</li>
+<li><a href="https://css-tricks.com/specifics-on-css-specificity/" target="_blank" rel="external">https://css-tricks.com/specifics-on-css-specificity/</a> - о специфике CSS-селекторов.</li>
+<li><a href="http://specificity.keegan.st" target="_blank" rel="external">http://specificity.keegan.st</a> - калькулятор который поможет вам посчитать силу селектора.</li>
+</ul>
+<p>Большая часть топика подготовалена при помощи <a href="https://medium.com/@dte/understanding-css-selector-specificity-a02238a02a59" target="_blank" rel="external">статьи</a></p>
 
         
             
         
     </div>
     <div class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="../../../../tags/index.html">css</a>
+
+            </div>
         
         <div class="post-actions-wrap">
     <nav>
@@ -185,7 +225,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../12/index.html" data-tooltip="Backbone. Часть 1. Модели, коллекции и представления">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -195,17 +235,17 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/about/index.html">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/about/index.html">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/about/index.html">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -238,7 +278,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../12/index.html" data-tooltip="Backbone. Часть 1. Модели, коллекции и представления">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -248,17 +288,17 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/about/index.html">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/about/index.html">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/about/index.html">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -313,8 +353,19 @@
         <div id="cover" style="background-image:url('/assets/images/cover.png');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="../assets/js/script.min.js" type="text/javascript"></script>
+<script src="../../../../assets/js/script.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'blogrukomoynikovru';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
 
 
 </html>
