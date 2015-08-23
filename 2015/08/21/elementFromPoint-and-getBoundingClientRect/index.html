@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Максим Рукомойников">
-    <title>Максим Рукомойников - Мой селектор сильнее чем твой</title>
+    <title>Максим Рукомойников - Парочка полезных элементов из DOM: elementFromPoint and getBoundingClientRect</title>
     <meta name="author" content="Maksim Rukomoynikov">
     <meta name="description" content="Максим Рукомойников">
     <link rel="icon" href="../../../../assets/images/null">
@@ -150,55 +150,34 @@
     
         <div class="post-header main-content-wrap">
     
-        <h1 class="post-title" itemprop="headline">Мой селектор сильнее чем твой</h1>
+        <h1 class="post-title" itemprop="headline">Парочка полезных элементов из DOM: elementFromPoint and getBoundingClientRect</h1>
     
     <div class="post-meta">
-    <time  itemprop="datePublished" content="Fri Aug 14 2015 10:44:20 GMT+0400">
-        Aug 14, 2015
+    <time  itemprop="datePublished" content="Fri Aug 21 2015 11:02:51 GMT+0400">
+        Aug 21, 2015
     </time>
     
 </div>
 </div>
     
     <div class="post-content markdown main-content-wrap" itemprop="articleBody">
-        <p>Скорее для себя, на память. О том как посчитать специфику CSS-селекторов. Все знают, что правила в CSS применяются не по порядку их написания (за одним исключением описанным ниже), а по специфике селектора. Пример: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div a &#123;&#10;&#9;color : red;&#10;&#125;&#10;&#10;a &#123;&#10;&#9;color : blue;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>Как вы думаете какого цвета будут ссылки на странице? Верно - красного, потому что селектор “div a” специфичнее (подробнее) чем просто “a”. Ещё примеры селекторов:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.menu &#62; a &#62; span#first&#10;&#10;// &#1086;&#1085; &#1078;&#1077;&#10;&#10;#first</span><br></pre></td></tr></table></figure>
-<p>Посмотрите как браузер разбирает селекторы и применяет их к элементам, пример для div.menu &gt; a &gt; span#first:</p>
+        <p>Я честно говоря не знал о них, а зря. На деле они оказались довольно полезными, особенно getBoundingClientRect. О нём и расскажу в первую очередь.</p>
+<p>#getBoundingClientRect#</p>
+<p>Метод который присутствует у любого DOM узла. Возвращает объект со следующими свойствами:</p>
 <ul>
-<li>Найти все элементы с id - #first (вы помните что id, должен быть уникальным на странице, да?).</li>
-<li>Выбрать элементы которые являются span</li>
-<li>Отделить только те элементы которые являются прямыми потомками тега a</li>
-<li>В этой подвыборке найти все элементы которые являются потомками элементов с классом menu</li>
-<li>Отфильтровать подвыборку, чтобы все элементы с классом menu являлись div’ами.</li>
-<li>Применить оформление к тем самым первым элементам, с id - #first.</li>
+<li>bottom - координата нижней границы блока, отсчёт от верхней границы viewport.</li>
+<li>top - координата верхней границы блока, отсчёт так же как и для bottom</li>
+<li>height - высота блока в px (равняется bottom - top)</li>
+<li>left - кордината левой границы блока, другими словами количество пикселей от самого левого края viewport</li>
+<li>right: кордината правой границы блока, отсчёт так же от левого края экрана</li>
+<li>width - ширина блока в px (равняется right - left)</li>
 </ul>
-<p>Самое главное - то что браузер читаает ваши селекторы справо налево. Другими словами “#menu span” будет иметь всего два шага:</p>
-<ul>
-<li>Найти все элементы span на странице</li>
-<li>Из них сделать подвыборку тех кто является потомком элементов с id - #menu</li>
-<li>Применить офорление</li>
-</ul>
-<p>Что вобщем занмиает меньше времени, именно такой парадигмы придерживается БЭМ. </p>
-<h2 id="Как_посчитать_специфику_селектора">Как посчитать специфику селектора</h2><p>Оказалось всё просто, каждый параметр в селекторе обладает определённой силой, которая заранее известна, сложив все составляющие в сумме можно получить общую силу селектора.</p>
-<ul>
-<li>Элементы и пседоэлементы (‘a, div , body, :before, :after’) составляют 1 очко.</li>
-<li>Классы и селекторы по аттрибутам (‘.element, [type=”text”]) получают 10 очков.</li>
-<li>ID (‘#header) идут за 100 очков.</li>
-<li>Инлайн-стили считаются за 1000 очков.</li>
-<li>Самый мощный параметр - ‘!important’ его значение равно NaN (Not a number)</li>
-</ul>
-<p>Соответственно “div a” - даст 2 очка, а “#div a” - 101 очко. Соответственно второй селектор важнее чем первый и именно его параметры будут применены к элементам a.</p>
-<p>В начале я упомянул о том что иногда селекторы работют именно в порядке обьявления, это случается тогда когда они равны. Пример я показал на <a href="http://codepen.io/anon/pen/KpYBxa" target="_blank" rel="external">codepen</a>.</p>
-<p>Несколько полезных ресурсов по теме:</p>
-<ul>
-<li><a href="http://cssstats.com" target="_blank" rel="external">http://cssstats.com</a> - анализ CSS файла и статистика.</li>
-<li><a href="https://css-tricks.com/specifics-on-css-specificity/" target="_blank" rel="external">https://css-tricks.com/specifics-on-css-specificity/</a> - о специфике CSS-селекторов.</li>
-<li><a href="http://specificity.keegan.st" target="_blank" rel="external">http://specificity.keegan.st</a> - калькулятор который поможет вам посчитать силу селектора.</li>
-</ul>
-<p>Большая часть топика подготовалена при помощи <a href="https://medium.com/@dte/understanding-css-selector-specificity-a02238a02a59" target="_blank" rel="external">статьи</a></p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div class=&#39;rectangle&#39;&#62;&#10;&#9;2&#9;&#10;&#60;/div&#62;&#10;&#10;document.addEventListener(&#39;click&#39;, function(event)&#123;&#10;&#9;event.target.getBoundingClientRect()&#10;&#125;)</span><br></pre></td></tr></table></figure>
+<p>P.S. Естественно вы должны понимать, если это блочный элемент, и в нём нет элементов из нормального потока, то высота будет 0, а ширина равная разрешению.</p>
+<p>#elementFromPoint#</p>
+<p>Применив этот метод вы узнаете какой элемент находится по заданным координатам. Точнее говоря какой самый верхний элемент. Другими словами, если вы спозиционировали два элемента друг на друга, то этот метод покажет какой элемент стоит в верху. Работает и для SVG элементов.</p>
+<p>Вам может пригодиться аналог этого метода - getElement#s#FromPoint, который работает похожим образом, но возвращает массив значений.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&#39;click&#39;, function(event)&#123;&#10;&#9;console.log(document.elementFromPoint(event.x, event.y))&#10;&#125;)</span><br></pre></td></tr></table></figure>
         
             
         
@@ -217,7 +196,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../19/index.html"  data-tooltip="Плагины для Sublime которые я использую в работе">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -225,7 +204,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../12/index.html" data-tooltip="Backbone. Часть 1. Модели, коллекции и представления">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../19/index.html" data-tooltip="Плагины для Sublime которые я использую в работе">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -235,17 +214,17 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -270,7 +249,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../19/index.html"  data-tooltip="Плагины для Sublime которые я использую в работе">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -278,7 +257,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../12/index.html" data-tooltip="Backbone. Часть 1. Модели, коллекции и представления">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../19/index.html" data-tooltip="Плагины для Sublime которые я использую в работе">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -288,17 +267,17 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>

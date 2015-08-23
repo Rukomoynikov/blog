@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/</loc>
+    <lastmod>2015-08-23T21:50:22.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/08/19/My-IDE-is-Sublime/</loc>
+    <lastmod>2015-08-23T21:49:10.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.rukomoynikov.ru/2015/08/12/backbone-intro-part1/</loc>
     <lastmod>2015-08-14T08:59:39.000Z</lastmod>
   </url>
@@ -17,11 +27,6 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/06/08/joinme-theme/</loc>
-    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.rukomoynikov.ru/2015/05/17/css-selectors-ididnt-know/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
@@ -32,7 +37,7 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/06/12/free-template-joremipsum/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/06/08/joinme-theme/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
@@ -43,6 +48,11 @@
   
   <url>
     <loc>http://blog.rukomoynikov.ru/2015/01/09/hexo-static-site-generator/</loc>
+    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/06/12/free-template-joremipsum/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
