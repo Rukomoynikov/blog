@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.rukomoynikov.ru/2015/08/30/Build-your-own-yeoman-generator/</loc>
+    <lastmod>2015-08-30T15:00:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/</loc>
+    <lastmod>2015-08-30T14:49:31.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/</loc>
     <lastmod>2015-08-23T21:50:22.000Z</lastmod>
   </url>
@@ -22,16 +32,6 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/07/17/Please-booking-ticket/</loc>
-    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.rukomoynikov.ru/2015/05/17/css-selectors-ididnt-know/</loc>
-    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.rukomoynikov.ru/2015/05/24/css-blending/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
@@ -47,7 +47,17 @@
   </url>
   
   <url>
+    <loc>http://blog.rukomoynikov.ru/2015/07/17/Please-booking-ticket/</loc>
+    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.rukomoynikov.ru/2015/01/09/hexo-static-site-generator/</loc>
+    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/07/20/Fundamental-Node-js-design-patterns/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
@@ -57,7 +67,7 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/07/20/Fundamental-Node-js-design-patterns/</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/05/17/css-selectors-ididnt-know/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   

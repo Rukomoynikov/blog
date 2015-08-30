@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Максим Рукомойников">
-    <title>Максим Рукомойников - Парочка полезных элементов из DOM: elementFromPoint and getBoundingClientRect</title>
+    <title>Максим Рукомойников - Способы кастомизации темы для Wordpress</title>
     <meta name="author" content="Maksim Rukomoynikov">
     <meta name="description" content="Максим Рукомойников">
     <link rel="icon" href="../../../../assets/images/null">
@@ -150,34 +150,100 @@
     
         <div class="post-header main-content-wrap">
     
-        <h1 class="post-title" itemprop="headline">Парочка полезных элементов из DOM: elementFromPoint and getBoundingClientRect</h1>
+        <h1 class="post-title" itemprop="headline">Способы кастомизации темы для Wordpress</h1>
     
     <div class="post-meta">
-    <time  itemprop="datePublished" content="Fri Aug 21 2015 11:02:51 GMT+0400">
-        Aug 21, 2015
+    <time  itemprop="datePublished" content="Fri Aug 28 2015 18:35:28 GMT+0400">
+        Aug 28, 2015
     </time>
     
 </div>
 </div>
     
     <div class="post-content markdown main-content-wrap" itemprop="articleBody">
-        <p>Я честно говоря не знал о них, а зря. На деле они оказались довольно полезными, особенно getBoundingClientRect. О нём и расскажу в первую очередь.</p>
-<p>#getBoundingClientRect#</p>
-<p>Метод который присутствует у любого DOM узла. Возвращает объект со следующими свойствами:</p>
-<ul>
-<li>bottom - координата нижней границы блока, отсчёт от верхней границы viewport.</li>
-<li>top - координата верхней границы блока, отсчёт так же как и для bottom</li>
-<li>height - высота блока в px (равняется bottom - top)</li>
-<li>left - кордината левой границы блока, другими словами количество пикселей от самого левого края viewport</li>
-<li>right: кордината правой границы блока, отсчёт так же от левого края экрана</li>
-<li>width - ширина блока в px (равняется right - left)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div class=&#39;rectangle&#39;&#62;&#10;&#9;2&#9;&#10;&#60;/div&#62;&#10;&#10;document.addEventListener(&#39;click&#39;, function(event)&#123;&#10;&#9;event.target.getBoundingClientRect()&#10;&#125;)</span><br></pre></td></tr></table></figure>
-<p>P.S. Естественно вы должны понимать, если это блочный элемент, и в нём нет элементов из нормального потока, то высота будет 0, а ширина равная разрешению.</p>
-<p>#elementFromPoint#</p>
-<p>Применив этот метод вы узнаете какой элемент находится по заданным координатам. Точнее говоря какой самый верхний элемент. Другими словами, если вы спозиционировали два элемента друг на друга, то этот метод покажет какой элемент стоит в верху. Работает и для SVG элементов.</p>
-<p>Вам может пригодиться аналог этого метода - getElement#s#FromPoint, который работает похожим образом, но возвращает массив значений.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&#39;click&#39;, function(event)&#123;&#10;&#9;console.log(document.elementFromPoint(event.x, event.y))&#10;&#125;)</span><br></pre></td></tr></table></figure>
+        <p>Если поискать на бирже upwork работы по запросу wordpress, можно найти много, очень много возможностей заработать.</p>
+<p>В большинстве случаев для создания темы вам понадобится дополнительный функционал, как например карты или форма контактов. Было бы странно писать свой велосипед, когда существует масса готовых и проверенных решений. </p>
+<p>&lt;?php<br>add_theme_support( ‘post-thumbnails’ ); </p>
+<p>// Add required plugins<br>require_once dirname( <strong>FILE</strong> ) . ‘/class-tgm-plugin-activation.php’;</p>
+<p>add_action( ‘tgmpa_register’, ‘register_required_plugins’ );</p>
+<p>function register_required_plugins() {<br>    $plugins = array(<br>        array(<br>            ‘name’               =&gt; ‘contact-form-7’,<br>            ‘slug’               =&gt; ‘contact-form-7’,<br>            ‘required’           =&gt; true,<br>            ‘version’            =&gt; ‘’,<br>            ‘force_activation’   =&gt; false,<br>            ‘force_deactivation’ =&gt; false,<br>            ‘external_url’       =&gt; ‘’,<br>            ‘is_callable’        =&gt; ‘’,<br>        ),<br>        array(<br>            ‘name’               =&gt; ‘wp-google-maps’,<br>            ‘slug’               =&gt; ‘wp-google-maps’,<br>            ‘required’           =&gt; true,<br>            ‘version’            =&gt; ‘’,<br>            ‘force_activation’   =&gt; false,<br>            ‘force_deactivation’ =&gt; false,<br>            ‘external_url’       =&gt; ‘’,<br>            ‘is_callable’        =&gt; ‘’,<br>        )<br>    );</p>
+<pre><code>tgmpa( <span class="variable">$plugins</span>);
+</code></pre><p>};</p>
+<p>?&gt;</p>
+<p>&lt;?php<br>// Customization theme settings page<br>add_action(‘customize_register’, function($customizer){<br>    $customizer-&gt;add_section(<br>        ‘contact_form_section’,<br>        array(<br>            ‘title’ =&gt; ‘Contact form’,<br>            ‘description’ =&gt; ‘’,<br>            ‘priority’ =&gt; 11,<br>        )<br>    );</p>
+<pre><code><span class="variable">$customizer-</span>&gt;add_setting(
+    <span class="string">'contact_form'</span>,
+    <span class="keyword">array</span>(<span class="string">'default'</span> =&gt; <span class="string">''</span>)
+);
+
+<span class="variable">$customizer-</span>&gt;add_control(
+    <span class="string">'contact_form'</span>,
+    <span class="keyword">array</span>(
+        <span class="string">'label'</span> =&gt; <span class="string">'Please include shortcode from Contact Form 7'</span>,
+        <span class="string">'section'</span> =&gt; <span class="string">'contact_form_section'</span>,
+        <span class="string">'type'</span> =&gt; <span class="string">'text'</span>,
+    )
+);
+
+<span class="variable">$customizer-</span>&gt;add_section(
+    <span class="string">'map_section'</span>,
+    <span class="keyword">array</span>(
+        <span class="string">'title'</span> =&gt; <span class="string">'Google maps'</span>,
+        <span class="string">'description'</span> =&gt; <span class="string">''</span>,
+        <span class="string">'priority'</span> =&gt; <span class="number">11</span>,
+    )
+);
+
+<span class="variable">$customizer-</span>&gt;add_setting(
+    <span class="string">'google_map'</span>,
+    <span class="keyword">array</span>(<span class="string">'default'</span> =&gt; <span class="string">''</span>)
+);    
+
+<span class="variable">$customizer-</span>&gt;add_control(
+    <span class="string">'google_map'</span>,
+    <span class="keyword">array</span>(
+        <span class="string">'label'</span> =&gt; <span class="string">'Please include shortcode from WP Google Maps'</span>,
+        <span class="string">'section'</span> =&gt; <span class="string">'map_section'</span>,
+        <span class="string">'type'</span> =&gt; <span class="string">'text'</span>,
+    )
+);
+
+<span class="variable">$customizer-</span>&gt;add_section(<span class="string">'media_section'</span>, <span class="keyword">array</span>(
+    <span class="string">'title'</span> =&gt; <span class="string">'Header image, Logo, Fullscreen'</span>,
+    <span class="string">"priority"</span> =&gt; <span class="number">11</span>
+));
+
+<span class="variable">$customizer-</span>&gt;add_setting(<span class="string">'fullscreen'</span>, <span class="keyword">array</span>(
+    <span class="string">'default'</span> =&gt; <span class="string">'no'</span>
+));
+
+<span class="variable">$customizer-</span>&gt;add_control(<span class="string">'fullscreen'</span>, <span class="keyword">array</span>(
+    <span class="string">'label'</span> =&gt; <span class="string">'Enable fullscreen markup'</span>,
+    <span class="string">'type'</span> =&gt; <span class="string">'radio'</span>,
+    <span class="string">'choices'</span> =&gt; <span class="keyword">array</span>(
+        <span class="string">'no'</span> =&gt; <span class="string">'no'</span>,
+        <span class="string">'yes'</span> =&gt; <span class="string">'yes'</span>
+    ),
+    <span class="string">'section'</span> =&gt; <span class="string">'media_section'</span>
+));
+
+<span class="variable">$customizer-</span>&gt;add_setting(<span class="string">'theme_logo'</span>);
+
+<span class="variable">$customizer-</span>&gt;add_control( new WP_Customize_Image_Control( <span class="variable">$customizer</span>, <span class="string">'theme_logo'</span>, <span class="keyword">array</span>(
+    <span class="string">'label'</span>    =&gt; _<span class="number">_</span>( <span class="string">'Logo'</span>, <span class="string">'theme_logo'</span> ),
+    <span class="string">'section'</span>  =&gt; <span class="string">'media_section'</span>,
+) ) );
+
+<span class="variable">$customizer-</span>&gt;add_setting(<span class="string">'header_image'</span>);
+
+<span class="variable">$customizer-</span>&gt;add_control( new WP_Customize_Image_Control( <span class="variable">$customizer</span>, <span class="string">'header_image'</span>, <span class="keyword">array</span>(
+    <span class="string">'label'</span>    =&gt; _<span class="number">_</span>( <span class="string">'Header image'</span>, <span class="string">'header_image'</span> ),
+    <span class="string">'section'</span>  =&gt; <span class="string">'media_section'</span>,
+) ) );
+</code></pre><p>});<br>?&gt;</p>
+<p>&lt;?php<br>// Posts type<br>add_action( ‘init’, ‘create_features_and_citate_types’);</p>
+<p>function create_features_and_citate_types() {<br>  register_post_type( ‘features’,<br>    array(<br>      ‘labels’ =&gt; array(<br>        ‘name’ =&gt; ‘Features’,<br>        ‘singular_name’ =&gt; ‘Feature’<br>      ),<br>      ‘public’ =&gt; true,<br>      ‘has_archive’ =&gt; true,<br>      ‘supports’ =&gt; array(‘title’, ‘editor’, ‘thumbnail’)<br>    )<br>  );<br>  register_post_type( ‘citates’,<br>    array(<br>      ‘labels’ =&gt; array(<br>        ‘name’ =&gt; ‘Citates’,<br>        ‘singular_name’ =&gt; ‘Citate’<br>      ),<br>      ‘public’ =&gt; true,<br>      ‘has_archive’ =&gt; true,<br>      ‘supports’ =&gt; array(‘title’, ‘editor’, ‘thumbnail’)<br>    )<br>  );<br>};</p>
+
         
             
         
@@ -187,7 +253,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="../../../../tags/index.html">css</a>
+    <a class="tag tag--primary tag--small t-link" href="../../../../tags/index.html">-csm</a>
 
             </div>
         
@@ -196,7 +262,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../28/index.html"  data-tooltip="Способы кастомизации темы для Wordpress">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../30/index.html"  data-tooltip="Использование yeoman генераторов в быту">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -204,7 +270,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../19/index.html" data-tooltip="Плагины для Sublime которые я использую в работе">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../21/index.html" data-tooltip="Парочка полезных элементов из DOM: elementFromPoint and getBoundingClientRect">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -214,17 +280,17 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -249,7 +315,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../28/index.html"  data-tooltip="Способы кастомизации темы для Wordpress">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../30/index.html"  data-tooltip="Использование yeoman генераторов в быту">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -257,7 +323,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../19/index.html" data-tooltip="Плагины для Sublime которые я использую в работе">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../21/index.html" data-tooltip="Парочка полезных элементов из DOM: elementFromPoint and getBoundingClientRect">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -267,17 +333,17 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/21/elementFromPoint-and-getBoundingClientRect/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
