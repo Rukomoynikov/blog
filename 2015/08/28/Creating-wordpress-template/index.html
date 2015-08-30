@@ -161,89 +161,23 @@
 </div>
     
     <div class="post-content markdown main-content-wrap" itemprop="articleBody">
-        <p>Если поискать на бирже upwork работы по запросу wordpress, можно найти много, очень много возможностей заработать.</p>
-<p>В большинстве случаев для создания темы вам понадобится дополнительный функционал, как например карты или форма контактов. Было бы странно писать свой велосипед, когда существует масса готовых и проверенных решений. </p>
-<p>&lt;?php<br>add_theme_support( ‘post-thumbnails’ ); </p>
-<p>// Add required plugins<br>require_once dirname( <strong>FILE</strong> ) . ‘/class-tgm-plugin-activation.php’;</p>
-<p>add_action( ‘tgmpa_register’, ‘register_required_plugins’ );</p>
-<p>function register_required_plugins() {<br>    $plugins = array(<br>        array(<br>            ‘name’               =&gt; ‘contact-form-7’,<br>            ‘slug’               =&gt; ‘contact-form-7’,<br>            ‘required’           =&gt; true,<br>            ‘version’            =&gt; ‘’,<br>            ‘force_activation’   =&gt; false,<br>            ‘force_deactivation’ =&gt; false,<br>            ‘external_url’       =&gt; ‘’,<br>            ‘is_callable’        =&gt; ‘’,<br>        ),<br>        array(<br>            ‘name’               =&gt; ‘wp-google-maps’,<br>            ‘slug’               =&gt; ‘wp-google-maps’,<br>            ‘required’           =&gt; true,<br>            ‘version’            =&gt; ‘’,<br>            ‘force_activation’   =&gt; false,<br>            ‘force_deactivation’ =&gt; false,<br>            ‘external_url’       =&gt; ‘’,<br>            ‘is_callable’        =&gt; ‘’,<br>        )<br>    );</p>
-<pre><code>tgmpa( <span class="variable">$plugins</span>);
-</code></pre><p>};</p>
-<p>?&gt;</p>
-<p>&lt;?php<br>// Customization theme settings page<br>add_action(‘customize_register’, function($customizer){<br>    $customizer-&gt;add_section(<br>        ‘contact_form_section’,<br>        array(<br>            ‘title’ =&gt; ‘Contact form’,<br>            ‘description’ =&gt; ‘’,<br>            ‘priority’ =&gt; 11,<br>        )<br>    );</p>
-<pre><code><span class="variable">$customizer-</span>&gt;add_setting(
-    <span class="string">'contact_form'</span>,
-    <span class="keyword">array</span>(<span class="string">'default'</span> =&gt; <span class="string">''</span>)
-);
-
-<span class="variable">$customizer-</span>&gt;add_control(
-    <span class="string">'contact_form'</span>,
-    <span class="keyword">array</span>(
-        <span class="string">'label'</span> =&gt; <span class="string">'Please include shortcode from Contact Form 7'</span>,
-        <span class="string">'section'</span> =&gt; <span class="string">'contact_form_section'</span>,
-        <span class="string">'type'</span> =&gt; <span class="string">'text'</span>,
-    )
-);
-
-<span class="variable">$customizer-</span>&gt;add_section(
-    <span class="string">'map_section'</span>,
-    <span class="keyword">array</span>(
-        <span class="string">'title'</span> =&gt; <span class="string">'Google maps'</span>,
-        <span class="string">'description'</span> =&gt; <span class="string">''</span>,
-        <span class="string">'priority'</span> =&gt; <span class="number">11</span>,
-    )
-);
-
-<span class="variable">$customizer-</span>&gt;add_setting(
-    <span class="string">'google_map'</span>,
-    <span class="keyword">array</span>(<span class="string">'default'</span> =&gt; <span class="string">''</span>)
-);    
-
-<span class="variable">$customizer-</span>&gt;add_control(
-    <span class="string">'google_map'</span>,
-    <span class="keyword">array</span>(
-        <span class="string">'label'</span> =&gt; <span class="string">'Please include shortcode from WP Google Maps'</span>,
-        <span class="string">'section'</span> =&gt; <span class="string">'map_section'</span>,
-        <span class="string">'type'</span> =&gt; <span class="string">'text'</span>,
-    )
-);
-
-<span class="variable">$customizer-</span>&gt;add_section(<span class="string">'media_section'</span>, <span class="keyword">array</span>(
-    <span class="string">'title'</span> =&gt; <span class="string">'Header image, Logo, Fullscreen'</span>,
-    <span class="string">"priority"</span> =&gt; <span class="number">11</span>
-));
-
-<span class="variable">$customizer-</span>&gt;add_setting(<span class="string">'fullscreen'</span>, <span class="keyword">array</span>(
-    <span class="string">'default'</span> =&gt; <span class="string">'no'</span>
-));
-
-<span class="variable">$customizer-</span>&gt;add_control(<span class="string">'fullscreen'</span>, <span class="keyword">array</span>(
-    <span class="string">'label'</span> =&gt; <span class="string">'Enable fullscreen markup'</span>,
-    <span class="string">'type'</span> =&gt; <span class="string">'radio'</span>,
-    <span class="string">'choices'</span> =&gt; <span class="keyword">array</span>(
-        <span class="string">'no'</span> =&gt; <span class="string">'no'</span>,
-        <span class="string">'yes'</span> =&gt; <span class="string">'yes'</span>
-    ),
-    <span class="string">'section'</span> =&gt; <span class="string">'media_section'</span>
-));
-
-<span class="variable">$customizer-</span>&gt;add_setting(<span class="string">'theme_logo'</span>);
-
-<span class="variable">$customizer-</span>&gt;add_control( new WP_Customize_Image_Control( <span class="variable">$customizer</span>, <span class="string">'theme_logo'</span>, <span class="keyword">array</span>(
-    <span class="string">'label'</span>    =&gt; _<span class="number">_</span>( <span class="string">'Logo'</span>, <span class="string">'theme_logo'</span> ),
-    <span class="string">'section'</span>  =&gt; <span class="string">'media_section'</span>,
-) ) );
-
-<span class="variable">$customizer-</span>&gt;add_setting(<span class="string">'header_image'</span>);
-
-<span class="variable">$customizer-</span>&gt;add_control( new WP_Customize_Image_Control( <span class="variable">$customizer</span>, <span class="string">'header_image'</span>, <span class="keyword">array</span>(
-    <span class="string">'label'</span>    =&gt; _<span class="number">_</span>( <span class="string">'Header image'</span>, <span class="string">'header_image'</span> ),
-    <span class="string">'section'</span>  =&gt; <span class="string">'media_section'</span>,
-) ) );
-</code></pre><p>});<br>?&gt;</p>
-<p>&lt;?php<br>// Posts type<br>add_action( ‘init’, ‘create_features_and_citate_types’);</p>
-<p>function create_features_and_citate_types() {<br>  register_post_type( ‘features’,<br>    array(<br>      ‘labels’ =&gt; array(<br>        ‘name’ =&gt; ‘Features’,<br>        ‘singular_name’ =&gt; ‘Feature’<br>      ),<br>      ‘public’ =&gt; true,<br>      ‘has_archive’ =&gt; true,<br>      ‘supports’ =&gt; array(‘title’, ‘editor’, ‘thumbnail’)<br>    )<br>  );<br>  register_post_type( ‘citates’,<br>    array(<br>      ‘labels’ =&gt; array(<br>        ‘name’ =&gt; ‘Citates’,<br>        ‘singular_name’ =&gt; ‘Citate’<br>      ),<br>      ‘public’ =&gt; true,<br>      ‘has_archive’ =&gt; true,<br>      ‘supports’ =&gt; array(‘title’, ‘editor’, ‘thumbnail’)<br>    )<br>  );<br>};</p>
-
+        <p>Если поискать на бирже upwork работы по запросу wordpress, можно найти много, очень много возможностей заработать. Создание сайтов на Wordpress - простой способ начать зарабатывать деньги на этих биржах, да и в целом для небольших сайтов Wordpress может стать хорошим решением.</p>
+<p>У меня давно припасены несколько сайтов, которые находятся на стадии вёрстка. Думаю мне интересно сделать из них готовый шаблон для CMS. Первой на очереди Wordpress (далее Битрикс). Сайт будет простой посадочной страницей для мероприятия. Присутствуют форма регистрации и карта, всё настраивается из панели администратора.</p>
+<p>Для настроек темы буду использовать <a href="https://codex.wordpress.org/Theme_Customization_API" target="_blank" rel="external">Theme Customization API</a> это набор методов для расширения страницы настроек темы. </p>
+<h2 id="Страница_настроек_шаблоны">Страница настроек шаблоны</h2><p>В файле functions.php зарегистрируйте новый обработчик события customize_register и колбэк который принимает объект управления настройками. Он имеет методы : add_section, add_setting, и add_control. </p>
+<p><strong>add_section</strong> - добавить раздел настроек</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_action(&#39;customize_register&#39;, function($customizer)&#123;&#10;    $customizer-&#62;add_section(&#10;        &#39;contact_form_section&#39;, // &#1059;&#1085;&#1080;&#1082;&#1072;&#1083;&#1100;&#1085;&#1099;&#1081; &#1080;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088;&#10;        array(&#10;            &#39;title&#39; =&#62; &#39;Contact form&#39;, // &#1053;&#1072;&#1079;&#1074;&#1072;&#1085;&#1080;&#1077; &#1088;&#1072;&#1079;&#1076;&#1077;&#1083;&#1072;&#10;            &#39;description&#39; =&#62; &#39;&#39;, // &#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077; &#1088;&#1072;&#1079;&#1076;&#1077;&#1083;&#1072;&#10;            &#39;priority&#39; =&#62; 11, // &#1055;&#1088;&#1080;&#1086;&#1088;&#1080;&#1090;&#1077;&#1090;&#10;        )&#10;    );&#10;);</span><br></pre></td></tr></table></figure>
+<p><strong>add_setting</strong> - добавить настройку</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$customizer-&#62;add_setting(&#10;    &#39;contact_form&#39;,// &#1059;&#1085;&#1080;&#1082;&#1072;&#1083;&#1100;&#1085;&#1099;&#1081; &#1080;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088;&#10;    array(&#10;    &#9;&#39;type&#39; =&#62; &#39;theme_mod&#39; &#1080;&#1083;&#1080; &#39;option&#39;, // &#1054;&#1087;&#1094;&#1080;&#1086;&#1085;&#1072;&#1083;&#1100;&#1085;&#1086;, &#1087;&#1086;-&#1091;&#1084;&#1086;&#1083;&#1095;&#1072;&#1085;&#1080;&#1102; theme_mod&#10;    &#9;&#39;default&#39; =&#62; &#39;&#39; // &#1047;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1087;&#1086;-&#1091;&#1084;&#1086;&#1083;&#1095;&#1072;&#1085;&#1080;&#1102;&#10;    &#9;&#39;capability&#39; =&#62; &#39;edit_theme_options&#39; // &#1055;&#1088;&#1072;&#1074;&#1072; &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1084;&#1080; &#1076;&#1086;&#1083;&#1078;&#1077;&#1085; &#1086;&#1073;&#1083;&#1072;&#1076;&#1072;&#1090;&#1100; &#1087;&#1086;&#1083;&#1100;&#1079;&#1086;&#1074;&#1072;&#1090;&#1077;&#1083;&#1100; &#1076;&#1083;&#1103; &#1080;&#1079;&#1084;&#1077;&#1085;&#1077;&#1085;&#1080;&#1103; &#1101;&#1090;&#1086;&#1075;&#1086; &#1087;&#1072;&#1088;&#1072;&#1084;&#1077;&#1090;&#1088;&#1072;&#10;    )&#10;);</span><br></pre></td></tr></table></figure>
+<p><strong> add_control</strong> - добавить контрол</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$customizer-&#62;add_control(&#10;    &#39;contact_form&#39;,&#10;    array(&#10;        &#39;label&#39; =&#62; &#39;Google Map&#39;, // &#1047;&#1072;&#1075;&#1086;&#1083;&#1086;&#1074;&#1086;&#1082; &#1082;&#1086;&#1085;&#1090;&#1088;&#1086;&#1083;&#1072;&#10;        &#39;section&#39; =&#62; &#39;contact_form_section&#39;, // &#1048;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088; &#1089;&#1077;&#1082;&#1094;&#1080;&#1080; &#1074; &#1082;&#1086;&#1090;&#1086;&#1088;&#1091;&#1102; &#1085;&#1077;&#1086;&#1073;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086; &#1074;&#1089;&#1090;&#1072;&#1074;&#1080;&#1090;&#1100; &#1082;&#1086;&#1085;&#1090;&#1088;&#1086;&#1083;&#10;        &#39;type&#39; =&#62; &#39;text&#39;, // &#1058;&#1080;&#1087; &#1082;&#1086;&#1085;&#1090;&#1088;&#1086;&#1083;&#1072;, text, select, radio, checkbox,&#10;        &#39;choices&#39; =&#62; array(&#10;&#9;&#9;&#9;&#39;left&#39;  =&#62; &#39;left&#39;,&#10;&#9;&#9;&#9;&#39;right&#39; =&#62; &#39;right&#39;&#10;        ) // &#1042;&#1086;&#1079;&#1084;&#1086;&#1078;&#1085;&#1099;&#1077; &#1074;&#1072;&#1088;&#1080;&#1072;&#1085;&#1090;&#1099; &#1076;&#1083;&#1103; &#1082;&#1086;&#1085;&#1090;&#1088;&#1086;&#1083;&#1086;&#1074; &#1090;&#1080;&#1087;&#1072; select &#1080;&#1083;&#1080; radio&#10;    )&#10;);</span><br></pre></td></tr></table></figure>
+<p>Вывести в теме значения настроек очень просто - get_theme<em>mod(‘идентификатор</em>контрола’)</p>
+<h2 id="Новые_типы_постов">Новые типы постов</h2><p>На самом деле добавлять новые типы постов прямо в теме не рекомендуется. И более того, если вы создаёте шаблон для wordpress.org такую тему не пропустят,я не знал. Хотя вот и понять не могу, что делать если мне в теме необходимы специальные типы контента, остаётся разделять контент по разным категориям и фильтровать по ним.</p>
+<p>Но на всякий случай, как же создавать новые типы постов (<a href="https://codex.wordpress.org/Function_Reference/register_post_type" target="_blank" rel="external">подробнее</a>):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_action( &#39;init&#39;, &#39;create_features_and_citate_types&#39;); // &#1061;&#1091;&#1082; &#1082;&#1086;&#1090;&#1086;&#1088;&#1099;&#1081; &#1089;&#1088;&#1072;&#1073;&#1086;&#1090;&#1072;&#1077;&#1090; &#1074; &#1084;&#1086;&#1084;&#1077;&#1085;&#1090; &#1080;&#1085;&#1080;&#1094;&#1080;&#1072;&#1083;&#1080;&#1079;&#1080;&#1072;&#1094;&#1080;&#1080;&#10;&#10;function create_features_and_citate_types() &#123;&#10;  register_post_type( &#39;features&#39;, // &#1080;&#1076;&#1077;&#1085;&#1090;&#1080;&#1092;&#1080;&#1082;&#1072;&#1090;&#1086;&#1088; &#1090;&#1080;&#1087;&#1072;&#10;    array(&#10;      &#39;labels&#39; =&#62; array(&#10;        &#39;name&#39; =&#62; &#39;Features&#39;, // &#1047;&#1072;&#1075;&#1086;&#1083;&#1086;&#1074;&#1086;&#1082; &#1076;&#1083;&#1103; &#1084;&#1085;&#1086;&#1078;&#1077;&#1089;&#1090;&#1074;&#1072; &#1086;&#1073;&#1098;&#1077;&#1082;&#1090;&#1086;&#1074;&#10;        &#39;singular_name&#39; =&#62; &#39;Feature&#39; // &#1047;&#1072;&#1075;&#1086;&#1083;&#1086;&#1074;&#1086;&#1082; &#1076;&#1083;&#1103; &#1086;&#1076;&#1085;&#1086;&#1075;&#1086; &#1086;&#1073;&#1098;&#1077;&#1082;&#1090;&#1072;&#10;      ),&#10;      &#39;public&#39; =&#62; true,&#10;      &#39;has_archive&#39; =&#62; true,&#10;&#9;  &#39;supports&#39; =&#62; array(&#39;title&#39;, &#39;editor&#39;, &#39;thumbnail&#39;),&#10;&#9;  &#39;exclude_from_search&#39; =&#62; true, // &#1059;&#1073;&#1088;&#1072;&#1090;&#1100; &#1080;&#1079; &#1087;&#1086;&#1080;&#1089;&#1082;&#1072;&#10;&#9;  &#39;menu_icon&#39; =&#62; &#39;dashicons-video-alt&#39;, // &#1048;&#1082;&#1086;&#1085;&#1082;&#1072;&#10;    )&#10;  );&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Необходимые_для_работы_плагины">Необходимые для работы плагины</h2><p>В большинстве случаев для создания темы вам понадобится дополнительный функционал, как например карты или форма контактов. Было бы странно писать свой велосипед, когда существует масса готовых и проверенных решений. И ребята из <a href="https://github.com/TGMPA/TGM-Plugin-Activation" target="_blank" rel="external">TGM создали простой способ</a> показать пользователю список необходимых плагинов.</p>
+<p>Включите файл TGM скаченный с гитхаба в свой functions.php и перечислите список необходимых плагинов.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;?&#10;// Add required plugins&#10;require_once dirname( __FILE__ ) . &#39;/class-tgm-plugin-activation.php&#39;;&#10;&#10;add_action( &#39;tgmpa_register&#39;, &#39;register_required_plugins&#39; );&#10;&#10;function register_required_plugins() &#123;&#10;&#9;$plugins = array(&#10;&#9;&#9;array(&#10;&#9;&#9;&#9;&#39;name&#39;               =&#62; &#39;contact-form-7&#39;,&#10;&#9;&#9;&#9;&#39;slug&#39;               =&#62; &#39;contact-form-7&#39;,&#10;&#9;&#9;&#9;&#39;required&#39;           =&#62; true,&#10;&#9;&#9;&#9;&#39;version&#39;            =&#62; &#39;&#39;, &#10;&#9;&#9;&#9;&#39;force_activation&#39;   =&#62; false,&#10;&#9;&#9;&#9;&#39;force_deactivation&#39; =&#62; false,&#10;&#9;&#9;&#9;&#39;external_url&#39;       =&#62; &#39;&#39;,&#10;&#9;&#9;&#9;&#39;is_callable&#39;        =&#62; &#39;&#39;,&#10;&#9;&#9;),&#10;&#9;&#9;array(&#10;&#9;&#9;&#9;&#39;name&#39;               =&#62; &#39;wp-google-maps&#39;,&#10;&#9;&#9;&#9;&#39;slug&#39;               =&#62; &#39;wp-google-maps&#39;,&#10;&#9;&#9;&#9;&#39;required&#39;           =&#62; true,&#10;&#9;&#9;&#9;&#39;version&#39;            =&#62; &#39;&#39;, &#10;&#9;&#9;&#9;&#39;force_activation&#39;   =&#62; false,&#10;&#9;&#9;&#9;&#39;force_deactivation&#39; =&#62; false,&#10;&#9;&#9;&#9;&#39;external_url&#39;       =&#62; &#39;&#39;,&#10;&#9;&#9;&#9;&#39;is_callable&#39;        =&#62; &#39;&#39;,&#10;&#9;&#9;)&#10;&#9;);&#10;&#10;&#9;tgmpa( $plugins);&#10;&#125;;&#10;&#10;?&#62;</span><br></pre></td></tr></table></figure>
         
             
         
@@ -253,7 +187,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="../../../../tags/index.html">-csm</a>
+    <a class="tag tag--primary tag--small t-link" href="../../../../tags/index.html">csm</a> <a class="tag tag--primary tag--small t-link" href="../../../../tags/index.html">wordpress</a>
 
             </div>
         

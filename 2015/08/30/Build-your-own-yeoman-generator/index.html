@@ -180,8 +180,11 @@
 </ul>
 <p>Пример вопроса:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type : &#39;list&#39;,&#10;name : &#39;csspreproccess&#39;,&#10;message : &#34;Which css preprocessor you wish to use?&#34;,&#10;choices : [&#10;&#9;&#123;&#10;&#9;&#9;name : &#39;Stylus&#39;,&#10;&#9;&#9;value : &#39;stylus&#39;&#10;&#9;&#125;,&#10;&#9;&#123;&#10;&#9;&#9;name : &#39;LESS&#39;,&#10;&#9;&#9;value : &#39;less&#39;&#10;&#9;&#125;],&#10;default : 0</span><br></pre></td></tr></table></figure>
-<p>Метод prompt на входе получает массив вопросов и вы должны описать колбек функцию с массивом ответов, необходимо вынести полученные переменные в глобальную область видимости чтобы далее работать с ними.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.twitterbootstrap = this.props.twitterbootstrap;&#10;this.csspreproccess = this.props.csspreproccess;</span><br></pre></td></tr></table></figure>
+<p>В действительности для моего генератора здесь история практически заканчивается, как и говорил, он довольно прост. В будущем я его обязательно доработаю.</p>
+<ul>
+<li>Код генератора - <a href="https://github.com/Rukomoynikov/generator-ruq" target="_blank" rel="external">https://github.com/Rukomoynikov/generator-ruq</a></li>
+<li>Установка и использование - nom install -g yo generator-ruq &amp;&amp; yo ruq</li>
+</ul>
 <h2 id="Статьи_по_теме">Статьи по теме</h2><p><a href="http://frontender.info/generator-yeoman/" target="_blank" rel="external">http://frontender.info/generator-yeoman/</a> - статья на Frontender Magazine<br><a href="http://code.tutsplus.com/tutorials/build-your-own-yeoman-generator--cms-20040" target="_blank" rel="external">http://code.tutsplus.com/tutorials/build-your-own-yeoman-generator--cms-20040</a> - статья с Tutsplus<br><a href="http://www.eguneys.com/blog/2014/09/17/lets-build-a-yeoman-generator-2" target="_blank" rel="external">http://www.eguneys.com/blog/2014/09/17/lets-build-a-yeoman-generator-2</a> - статья, весь код на coffeescript</p>
 
         
