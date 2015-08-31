@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title>Create Sublime Text Plugin | Максим Рукомойников</title>
+  <meta name="description" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+
+  <meta name="generator" content="Максим Рукомойников">
+
+  
+  
+  
+
+  
+</head>
+
+
+<body class="post-template">
+
+  <header class="site-head"  style="background-image: url(//blog.ghost.org/content/images/2013/Nov/cover.png)" >
+    <div class="vertical">
+        <div class="site-head-content inner">
+             <a class="blog-logo" href="/"><img src="//blog.ghost.org/content/images/2013/Nov/bloglogo_1-1.png" alt="Blog Logo"/></a> 
+            <h1 class="blog-title">Максим Рукомойников</h1>
+            <h2 class="blog-description"></h2>
+        </div>
+    </div>
+</header>
+  
+
+<main class="content" role="main">
+  <article class="post">
+    <span class="post-meta">
+      <time datetime="2015-08-31T16:31:58.000Z" itemprop="datePublished">
+          2015-08-31
+      </time>
+    
+</span>
+    <h1 class="post-title">Create Sublime Text Plugin</h1>
+    <section class="post-content">
+      <p>Для начала создайте дирректорию в папке Packages, например <strong>givemetime</strong>. В Sublime Text уже есть готовый сниппет для создания плагина, вызвать его можно нажав Tools в верхнем меню, там пункт New Plugin. Вы увидите что-то подобное:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import sublime, sublime_plugin&#10;&#10;class ExampleCommand(sublime_plugin.TextCommand):&#10;&#9;def run(self, edit):&#10;&#9;&#9;self.view.insert(edit, 0, &#34;Hello, World!&#34;)</span><br></pre></td></tr></table></figure>
+<p>В Sublime Text всё основано на командах. В этом файле мы создали обработчик команды Example, а Command это обязательная концовка. Обратите внимание в ExampleCommand - чередование больших и маленьких букв имеет значение, чтобы вызвать ExampleCommand необходимо использовать “command”, а для ExampleThisCoolCommand - “example_this_cool”. </p>
+<p>Вы можете создать два типа комманд - TextCommand или WindowCommand. Первый соотвественно отвечает за обработку текста, второй за визуальное представление.</p>
+<p>Сохраните файл под таким же именем как и класс, например ExeampleCommand.py, и создайте в этой же дирректории файл ExampleCommand.sublime-comands. Его содержимое:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#10;&#9;&#123;&#10;&#9;&#9;&#34;caption&#34; : &#34;How much time&#34;,&#10;&#9;&#9;&#34;command&#34; : &#34;example&#34;&#10;&#9;&#125;&#10;]</span><br></pre></td></tr></table></figure>
+<p>Кстати, не пытайтесь выполнить этот файл в обычной консоли, лучше вызовите консоль редактора View &gt; Show Console. И выполните команду:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.run_command(&#34;example&#34;)</span><br></pre></td></tr></table></figure>
+<p>Изготавливаемый плагин будет вставлять текущее время в текст. Простой, можно попробовать себя в деле.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class GiveMeTimeCommand(sublime_plugin.TextCommand):&#10;&#10;&#9;def run(self, edit):&#10;&#9;&#9;currenttime = str(datetime.datetime.now())&#10;&#9;&#9;curretn_cursor_position = self.view.sel()[0].begin()&#10;&#9;&#9;self.view.insert(edit, curretn_cursor_position, currenttime)</span><br></pre></td></tr></table></figure>
+<p>Другой пример плагина,который показывает подсказки из Google (это может быть и ваш API, который отдаёт JSON или XML).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import sublime, sublime_plugin&#10;&#10;from xml.etree import ElementTree as ET&#10;import urllib&#10;&#10;GOOGLE_AC = r&#34;http://google.com/complete/search?output=toolbar&#38;q=%s&#34;&#10;&#10;class Html5TemplateCommand(sublime_plugin.EventListener):&#10;&#10;&#9;def on_query_completions(self, view, prefix, locations):&#10;&#9;&#9;elements = ET.parse(urllib.request.urlopen(GOOGLE_AC % prefix)).getroot().findall(&#34;./CompleteSuggestion/suggestion&#34;)&#10;&#9;&#9;dir(elements)&#10;&#9;&#9;sugs = [(x.attrib[&#34;data&#34;],) * 2 for x in elements]&#10;&#9;&#9;return sugs</span><br></pre></td></tr></table></figure>
+    </section>
+    <footer class="post-footer">
+      <section class="author">
+    <h4>Maksim Rukomoynikov</h4>
+    <p>A designer, developer and entrepreneur. Spends his time travelling the world with a bag of kites. Likes journalism and publishing platforms.</p>
+</section>
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://blog.rukomoynikov.ru/2015/08/31/Create-Sublime-Text-Plugin/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.rukomoynikov.ru/2015/08/31/Create-Sublime-Text-Plugin/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://blog.rukomoynikov.ru/2015/08/31/Create-Sublime-Text-Plugin/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+    </footer>
+  </article>
+  <nav class="pagination" role="pagination">
+    
+    <span class="page-number">•</span>
+    
+    <a class="older-posts" href="../../30/index.html">
+        Использование yeoman генераторов в быту →
+    </a>
+    
+</nav>
+  <div id="comment" class="comments-area">
+    <h1 class="title"><a href="#disqus_comments" name="disqus_comments">Comments</a></h1>
+
+    
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+    
+</div>
+</main>
+
+
+  
+<footer class="site-footer">
+  
+  <div class="inner">
+     <section class="copyright">All content copyright <a href="/">Максим Рукомойников</a> &copy; 2014 &bull; All rights reserved.</section>
+     <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/">Hexo</a></section>
+  </div>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = 'blogrukomoynikovru';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

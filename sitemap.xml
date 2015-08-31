@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/</loc>
-    <lastmod>2015-08-30T18:53:43.000Z</lastmod>
+    <loc>http://blog.rukomoynikov.ru/2015/08/31/Create-Sublime-Text-Plugin/</loc>
+    <lastmod>2015-08-31T16:36:58.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.rukomoynikov.ru/2015/08/30/Build-your-own-yeoman-generator/</loc>
-    <lastmod>2015-08-30T15:13:50.000Z</lastmod>
+    <lastmod>2015-08-31T16:31:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/08/28/Creating-wordpress-template/</loc>
+    <lastmod>2015-08-30T18:56:53.000Z</lastmod>
   </url>
   
   <url>
@@ -29,11 +34,6 @@
   <url>
     <loc>http://blog.rukomoynikov.ru/2015/08/14/css-specificity-calculator/</loc>
     <lastmod>2015-08-14T08:59:34.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.rukomoynikov.ru/2015/05/24/css-blending/</loc>
-    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
   <url>
@@ -68,6 +68,11 @@
   
   <url>
     <loc>http://blog.rukomoynikov.ru/2015/05/17/css-selectors-ididnt-know/</loc>
+    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/05/24/css-blending/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
