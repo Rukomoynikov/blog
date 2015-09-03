@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.rukomoynikov.ru/about/index.html</loc>
+    <lastmod>2015-09-03T19:58:50.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.rukomoynikov.ru/2015/08/31/Create-Sublime-Text-Plugin/</loc>
     <lastmod>2015-08-31T16:36:58.000Z</lastmod>
   </url>
@@ -37,11 +42,6 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/06/08/joinme-theme/</loc>
-    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.rukomoynikov.ru/2015/07/16/Template-Perth/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
@@ -62,17 +62,17 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/2015/06/12/free-template-joremipsum/</loc>
-    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.rukomoynikov.ru/2015/05/17/css-selectors-ididnt-know/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.rukomoynikov.ru/2015/05/24/css-blending/</loc>
+    <lastmod>2015-08-12T09:25:15.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.rukomoynikov.ru/2015/06/12/free-template-joremipsum/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
@@ -102,7 +102,7 @@
   </url>
   
   <url>
-    <loc>http://blog.rukomoynikov.ru/about/index.html</loc>
+    <loc>http://blog.rukomoynikov.ru/2015/06/08/joinme-theme/</loc>
     <lastmod>2015-08-12T09:25:15.000Z</lastmod>
   </url>
   
